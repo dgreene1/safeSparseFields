@@ -20,10 +20,13 @@ class FieldsAwareContext<TSubset extends object | void>{
         TTotalReturn extends Promise<TObj | TObj[] | undefined | null> = Promise<TObj | TObj[]>,
         TApiOptionsMinusFields = unknown
     >(funcThatTakesFields: (fields: Array<(keyof TSubset)>, apiOptions: TApiOptionsMinusFields) => TTotalReturn):
+        // tslint:disable-next-line: no-any
         TTotalReturn extends Promise<any> ?
+            // tslint:disable-next-line: no-any
             TTotalReturn extends Promise<any[]> ?
                 (options: TApiOptionsMinusFields) => Promise<Array<Pick<SingleSynchronousResult<TObj>, Include<keyof SingleSynchronousResult<TObj>, keyof TSubset>>>> :
                 (options: TApiOptionsMinusFields) => Promise<Pick<TObj, Include<keyof SingleSynchronousResult<TObj>, keyof TSubset>>> :
+            // tslint:disable-next-line: no-any
             TTotalReturn extends any[] ?
                 (options: TApiOptionsMinusFields) => Array<Pick<SingleSynchronousResult<TObj>, Include<keyof SingleSynchronousResult<TObj>, keyof TSubset>>> :
                 (options: TApiOptionsMinusFields) => Pick<TObj, Include<keyof SingleSynchronousResult<TObj>, keyof TSubset>>
