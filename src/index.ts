@@ -39,19 +39,18 @@ class FieldsAwareContext<TSubset extends object | void>{
 
 }
 
-type SomeProps<T> = {
-    [key in keyof T]?: true
-}
-
 type MissingGenericWarning = "If you're seeing this message, please explicitly add the type parameter for the interface you expect to have returned by the HTTP endpoint";
 
-type NoInfer<T> = T extends void ? MissingGenericWarning : T;
 type NotVoid<T = void> = T extends void ? never : T;
 
+/**
+ * This factory function creates a class instance that is aware of (a) the interface you hope is returned and (b) the field/property names that that interface requires
+ * @param dictionaryOfWantedFields This is an object where the keys are the names of the properties on the interface that you passed into the type parameter (Note: you must pass in a type parameter for TSubset). Once you do, these fields will be passed to your function so you can use them.
+ */
 export function loadInterfaceAndFields<
     TSubset extends object | void = void,
 >(
-    dictionaryOfWantedFields: SomeProps<NoInfer<TSubset>>
+    dictionaryOfWantedFields: Record<keyof NotVoid<TSubset>, true>
 ): TSubset extends void ?
         MissingGenericWarning :
         FieldsAwareContext<NotVoid<TSubset>> {

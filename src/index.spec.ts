@@ -2,7 +2,8 @@ import { loadInterfaceAndFields } from "."
 import { IUser, MockAxiosHttpClient } from "../test/fakeApi/fakeUserService";
 
 interface IUserMinimal {
-    firstName: string
+    firstName: string,
+    group: number
 }
 
 describe('loadInterfaceAndFields', () => {
@@ -37,13 +38,17 @@ describe('loadInterfaceAndFields', () => {
             return resultOfApiCall;
         }
         // ARRANGE
-        const safeSparseFields = loadInterfaceAndFields<IUserMinimal>({"firstName": true});
+        const safeSparseFields = loadInterfaceAndFields<IUserMinimal>({
+            "firstName": true,
+            "group": true
+        });
         const getFirstNameOfUsers = safeSparseFields.setOriginalFunction(getUsersApiWrapper);
         const results = await getFirstNameOfUsers({returnAllUsers: true});
 
         // ASSERT
         expect(results).toContainEqual({
-            firstName: expect.any(String)
+            firstName: expect.any(String),
+            group: expect.any(Number)
         })
     })
 
@@ -64,27 +69,28 @@ describe('loadInterfaceAndFields', () => {
 
         // ARRANGE
         const safeSparseFields = loadInterfaceAndFields<IUserMinimal>({
-            "firstName": true
+            "firstName": true,
+            "group": true
         });
         const getFirstNameOfUsers = safeSparseFields.setOriginalFunction(getSpecificUserWrapper);
         const result = await getFirstNameOfUsers({firstName: "Bob"});
 
         // ASSERT
         expect(result).toEqual({
-            firstName: "Bob"
+            firstName: "Bob",
+            group: 1
         })
     })
 
     it('should clarify if you forgot to include the type parameter', async ()=> {
         // Arrange
-        const ifYouDontProvideATypeParameterThenYouCantPassARegularParameter = "If you're seeing this message, please explicitly add the type parameter for the interface you expect to have returned by the HTTP endpoint";
 
         // ACT
-        let safeSparseFields = loadInterfaceAndFields(ifYouDontProvideATypeParameterThenYouCantPassARegularParameter);
+        let safeSparseFields = loadInterfaceAndFields({});
 
+        // ASSERT
+        // Let's make sure that the only type you can set this to is the warning type
         safeSparseFields = "If you're seeing this message, please explicitly add the type parameter for the interface you expect to have returned by the HTTP endpoint"
-
-        // ARRANGE
         // NOTE: I know that this isn't a real test, but
         //      (a) you can't test types since they disappear at runtime
         //      (b) we have to use each function to pass the linter. So that's why we're using the safeSparseFields var
