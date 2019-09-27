@@ -6,6 +6,7 @@ describe('assertUnreachable', ()=>{
 
     it('should throw if the union has been narrowed to the point of never', ()=> {
         // Arrange
+        // tslint:disable-next-line: no-any
         const aValueThatShouldNeverHappen: AStringUnion = "c" as any;
 
         // Act
@@ -19,6 +20,7 @@ describe('assertUnreachable', ()=>{
                 assertUnreachable(aValueThatShouldNeverHappen);
             }
         } catch(err){
+            // tslint:disable-next-line: no-unsafe-any
             exceptionToTest = err;
         }
 
@@ -32,6 +34,7 @@ describe('doIfNever', ()=>{
 
     it('should return the result of the callback if the union has been narrowed to the point of never', ()=> {
         // Arrange
+        // tslint:disable-next-line: no-any
         const aValueThatShouldNeverHappen: AStringUnion = "c" as any;
         const valueToExpect = `let's default to "a"`;
         const callbackToDo = ()=> valueToExpect;
