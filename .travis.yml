@@ -1,0 +1,17 @@
+sudo: false
+language: node_js
+node_js:
+- '10'
+branches:
+  only:
+  - master
+before_install:
+- rm -rf node_modules
+- yarn upgrade
+install:
+- yarn install
+script:
+- ls
+- ps
+- yarn test
+- yarn prepare-badges
