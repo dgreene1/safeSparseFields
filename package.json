@@ -12,11 +12,12 @@
   ],
   "scripts": {
     "clean": "rimraf ./build && rimraf .tmp",
-    "build": "npm run clean && tsc && npm run lint",
+    "build": "yarn run clean && tsc && yarn run lint",
     "lint": "tslint \"**/*.ts\" --project .",
     "test": "jest --collectCoverage",
     "prepare-badges": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-    "pre-commit": "npm run build && npm run test"
+    "pre-commit": "yarn run build && yarn run test",
+    "prepublish": "yarn run pre-commit"
   },
   "husky": {
     "hooks": {
