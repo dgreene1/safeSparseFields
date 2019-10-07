@@ -64,7 +64,7 @@ const getUsersNames = loadInterfaceAndFields<IUserMinimal>({
     "lastName": true
 }).setOriginalFunction(getUsersApiWrapper);
 
-const users = getUsersApiWrapper(getUsers)
+const users = getUsersApiWrapper(getUsersNames)
 
 // We get the properties we wanted! Yay!
 console.log(users); // prints [{firstName: "Bob", lastName: "Smith"}, ...]
