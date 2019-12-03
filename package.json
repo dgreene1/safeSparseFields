@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
-    "coveralls": "^3.0.4",
+    "coveralls": "^3.0.9",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
     "js-joda": "^1.9",
