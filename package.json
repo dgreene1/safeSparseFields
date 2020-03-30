@@ -31,7 +31,7 @@
     "jest": "^25.2.4",
     "js-joda": "^1.9",
     "ts-jest": "^25.3.0",
-    "tslint": "^5.20.1",
+    "tslint": "^6.1.0",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.8.3",
     "typescript-tslint-plugin": "^0.5.5"
