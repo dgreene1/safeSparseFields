@@ -30,7 +30,7 @@
     "husky": "^4.2.5",
     "jest": "^25.3.0",
     "js-joda": "^1.9",
-    "ts-jest": "^25.3.1",
+    "ts-jest": "^25.4.0",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.8.3",
