@@ -25,7 +25,7 @@
     }
   },
   "devDependencies": {
-    "@types/jest": "^26.0.8",
+    "@types/jest": "^26.0.10",
     "coveralls": "^3.1.0",
     "husky": "^4.2.5",
     "jest": "^25.5.4",
